@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+/*
+ * Palette tokens. The six brand colors are overridden at runtime from the
+ * admin "Shop Setup" colors (see ThemeStyle in app/layout.tsx).
+ */
+@theme {
+  --color-ivory: #f4efe7;
+  --color-charcoal: #171717;
+  --color-gold: #c9a66b;
+  --color-taupe: #a99b89;
+  --color-ink: #24211e;
+  --color-espresso: #30251f;
+
+  --color-cream: #faf7f2;
+  --color-sand: #e8dfd2;
+  --color-mist: #efe8dd;
+
+  --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
+
+  --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-fade-up: fade-up 0.9s var(--ease-luxe) both;
+  --animate-ken-burns: ken-burns 12s ease-out both;
+  --animate-progress: progress linear both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes ken-burns {
+    from {
+      transform: scale(1.08);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-ivory font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-gold/40 text-charcoal;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold;
+  }
+}
+
+@utility container-luxe {
+  @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+}
+
+@utility eyebrow {
+  @apply text-[11px] font-medium tracking-[0.32em] uppercase;
+}
+
+@utility btn {
+  @apply inline-flex cursor-pointer items-center justify-center gap-2 px-7 py-3.5 text-xs font-medium tracking-[0.2em] uppercase transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+@utility btn-primary {
+  @apply btn bg-espresso text-ivory hover:bg-gold hover:text-charcoal;
+}
+
+@utility btn-outline {
+  @apply btn border border-ink/25 text-ink hover:border-gold hover:bg-gold hover:text-charcoal;
+}
+
+@utility btn-light {
+  @apply btn border border-ivory/60 text-ivory hover:border-gold hover:bg-gold hover:text-charcoal;
+}
+
+@utility input {
+  @apply w-full border border-sand bg-cream px-4 py-3 text-sm text-ink transition-colors outline-none placeholder:text-taupe focus:border-gold focus:bg-white;
+}
+
+@utility label {
+  @apply mb-1.5 block text-[11px] font-medium tracking-[0.18em] text-ink/70 uppercase;
+}
+
+@utility link-underline {
+  @apply relative after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-gold after:transition-transform after:duration-500 hover:after:origin-left hover:after:scale-x-100;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
